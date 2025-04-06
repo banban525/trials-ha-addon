@@ -1,0 +1,19 @@
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "json.schemas": [
+    {
+      "url": "/MraTypes.schema.json",
+      "fileMatch": [
+        "/MRA_custom/*.json"]
+    }
+  ]
+}
