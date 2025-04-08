@@ -28,6 +28,8 @@ COPY --chown=node:node --from=build /app/public ./public
 COPY --chown=node:node --from=build /app/.ts-node ./.ts-node
 COPY --chown=node:node --from=build /app/docker-entrypoint.sh ./
 
+RUN chmod +x docker-entrypoint.sh
+
 EXPOSE 3000
 
-ENTRYPOINT ["/bin/sh", "docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
