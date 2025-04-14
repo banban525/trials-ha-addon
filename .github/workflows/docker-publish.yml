@@ -95,7 +95,7 @@ jobs:
             --all \
             --addon \
             --docker-hub ghcr.io/${{ github.actor }} \
-            --image echonetlite2mqtt-addon/{arch} \
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/{arch} \
             --target /data/ha_addon
 
       # # Sign the resulting Docker image digest except on PRs.
