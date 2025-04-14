@@ -95,8 +95,8 @@ jobs:
             --all \
             --addon \
             --docker-hub ghcr.io/${{ github.actor }} \
-            --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/{arch} \
-            --target /data/ha_addon
+            --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-addon-{arch} \
+            --target .
 
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
