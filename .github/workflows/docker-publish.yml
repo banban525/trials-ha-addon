@@ -87,6 +87,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      # build for ha addon
+      - name: Publish
+        uses: home-assistant/builder@master
+        with:
+          args: |
+            --all \
+            --addon \
+            --docker-hub ghcr.io/${{ github.actor }} \
+            --image echonetlite2mqtt-addon/{arch} \
+            --target /data/ha_addon
 
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
