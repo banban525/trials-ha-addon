@@ -1,10 +1,10 @@
-ARG BUILD_FROM
+ARG BUILD_FROM="node:20-alpine"
 FROM ${BUILD_FROM} AS base
 
 RUN apk add --no-cache nodejs npm
 
 
-FROM base as build
+FROM base AS build
 
 WORKDIR /app
 COPY package*.json ./
