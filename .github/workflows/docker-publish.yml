@@ -95,7 +95,7 @@ jobs:
             --all \
             --addon \
             --docker-hub ghcr.io/${{ github.actor }} \
-            --image ${{ env.IMAGE_NAME }}-addon/{arch} \
+            --image trials-ha-addon-addon/{arch} \
             --target .
 
       # # Sign the resulting Docker image digest except on PRs.
