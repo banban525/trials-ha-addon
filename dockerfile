@@ -1,4 +1,4 @@
-ARG BUILD_FROM="node:20-alpine"
+ARG BUILD_FROM="alpine:3.21"
 FROM ${BUILD_FROM} AS base
 
 RUN addgroup -g 1000 node \
