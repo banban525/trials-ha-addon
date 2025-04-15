@@ -1,6 +1,8 @@
 ARG BUILD_FROM="node:20-alpine"
 FROM ${BUILD_FROM} AS base
 
+RUN addgroup -g 1000 node \
+    && adduser -u 1000 -G node -s /bin/sh -D node
 RUN apk add --no-cache nodejs npm
 
 
@@ -18,15 +20,16 @@ RUN chmod +x /app/docker-entrypoint.sh
 FROM base AS runtime
 
 # RUN apk --no-cache -U upgrade
-RUN mkdir -p /app/.ts-node
+RUN mkdir -p /app/.ts-node && chown -R node:node /app
 WORKDIR /app
 
 COPY package*.json ./
+USER node
 
 RUN npm ci --omit=dev
-COPY --from=build /app/public ./public
-COPY --from=build /app/.ts-node ./.ts-node
-COPY --from=build /app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY --chown=node:node --from=build /app/public ./public
+COPY --chown=node:node --from=build /app/.ts-node ./.ts-node
+COPY --chown=node:node --from=build /app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3000
 
