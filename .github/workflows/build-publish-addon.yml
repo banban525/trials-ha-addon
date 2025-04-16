@@ -38,14 +38,15 @@ jobs:
       - name: Extract version from package.json
         id: extract_version
         run: |
-          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
-          echo "VERSION=${{ env.VERSION }}"
+          VERSION=$(jq -r '.version' package.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Extracted version: $VERSION"
 
       # config.yamlのversionを上書きする
       - name: Update config.yaml version
         run: |
-          sed -i "s/version: .*/version: \"${{ env.VERSION }}\"/" config.yaml
-          echo "Updated config.yaml with version ${{ env.VERSION }}"
+          sed -i "s/version: .*/version: \"$VERSION\"/" config.yaml
+          echo "Updated config.yaml with version $VERSION"
 
       # docker-entrypoint_addon.shをdocker-entrypoint.shにリネームする
       - name: Rename docker-entrypoint_addon.sh to docker-entrypoint.sh
