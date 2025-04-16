@@ -61,7 +61,7 @@ jobs:
             --docker-hub ghcr.io/${{ github.actor }} \
             --image trials-ha-addon-addon/{arch} \
             --target . \
-            --release-tag ${{ github.ref_name }} \
+            --additional-tag ${{ github.ref_name }} \
 
 
 
