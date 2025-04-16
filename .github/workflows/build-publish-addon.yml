@@ -45,7 +45,7 @@ jobs:
       # config.yamlのversionを上書きする
       - name: Update config.yaml version
         run: |
-          sed -i "s/version: .*/version: \"$VERSION\"/" config.yaml
+          sed -i "s/version: .*/version: \"v$VERSION\"/" config.yaml
           echo "Updated config.yaml with version $VERSION"
 
       # docker-entrypoint_addon.shをdocker-entrypoint.shにリネームする

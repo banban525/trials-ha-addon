@@ -1,6 +1,7 @@
 name: "trials-ha-addon"
 description: "ECHONET Lite to MQTT bridge."
 version: "1.0.0"
+url: https://github.com/banban525/trials-ha-addon
 slug: "trials-ha-addon"
 arch:
   - aarch64
