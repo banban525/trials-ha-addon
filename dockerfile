@@ -1,4 +1,6 @@
 ARG BUILD_FROM="alpine:3.21"
+ARG BASE_IMAGE="base"
+
 FROM ${BUILD_FROM} AS base
 
 RUN addgroup -g 1000 node \
@@ -6,7 +8,7 @@ RUN addgroup -g 1000 node \
 RUN apk add --no-cache nodejs npm
 
 
-FROM base AS build
+FROM ${BASE_IMAGE} AS build
 
 WORKDIR /app
 COPY package*.json ./
