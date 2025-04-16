@@ -80,6 +80,8 @@ jobs:
       # なお、タグによるビルドではgitタグをdockerタグにする
       - name: Publish
         uses: home-assistant/builder@master
+        env:
+          VERSION: ${{ env.VERSION }}
         with:
           args: |
             --amd64 \
