@@ -1,4 +1,4 @@
-name: Docker
+name: build addon
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -41,6 +41,11 @@ jobs:
           echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
           echo "VERSION=${{ env.VERSION }}"
 
+      # config.yamlのversionを上書きする
+      - name: Update config.yaml version
+        run: |
+          sed -i "s/version: .*/version: \"${{ env.VERSION }}\"/" config.yaml
+          echo "Updated config.yaml with version ${{ env.VERSION }}"
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
@@ -61,24 +66,22 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # build for ha addon
+      # haのスクリプトでaddonをビルドする
+      # amd64とaarch64の両方をビルドして、github registryにpushする
+      # pushによるビルドではブランチ名とバージョン"-alpha"をタグにする
+      # なお、タグによるビルドではgitタグをdockerタグにする
       - name: Publish
         uses: home-assistant/builder@master
         with:
           args: |
-            --all \
+            --amd64 \
+            --aarch64 \
             --addon \
             --docker-hub ghcr.io/${{ github.actor }} \
             --image trials-ha-addon-addon/{arch} \
             --target . \
             --additional-tag ${{ github.ref_name }} \
             --version v${{ env.VERSION }}-alpha \
-
-      # # 上でビルドしたイメージをタグをつける。タグによるビルドの場合のみ
-      # - name: Tag image
-      #   if: github.event_name == 'push' && startsWith(github.ref_name, 'v')
-      #   run: |
-      #     docker tag ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64 ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64:latest
-      #     docker tag ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64 ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64:${{ github.ref_name }}
 
 
 
