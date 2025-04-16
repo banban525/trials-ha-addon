@@ -10,8 +10,8 @@ async function main():Promise<void>
     res.send("hello");
   });
 
-  const server = app.listen(3000, ():void => {
-    console.log("Server is running on http://localhost:3000");
+  const server = app.listen(8099, ():void => {
+    console.log("Server is running on http://localhost:8099");
   });
 }
 

@@ -33,6 +33,6 @@ COPY --chown=node:node --from=build /app/public ./public
 COPY --chown=node:node --from=build /app/.ts-node ./.ts-node
 COPY --chown=node:node --from=build /app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-EXPOSE 3000
+EXPOSE 8099
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
