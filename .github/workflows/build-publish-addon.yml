@@ -30,8 +30,17 @@ jobs:
       id-token: write
 
     steps:
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # package.jsonからバージョンを抽出する
+      - name: Extract version from package.json
+        id: extract_version
+        run: |
+          echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+          echo "VERSION=${{ env.VERSION }}"
+
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
@@ -62,6 +71,14 @@ jobs:
             --image trials-ha-addon-addon/{arch} \
             --target . \
             --additional-tag ${{ github.ref_name }} \
+            --version v${{ env.VERSION }}-alpha \
+
+      # # 上でビルドしたイメージをタグをつける。タグによるビルドの場合のみ
+      # - name: Tag image
+      #   if: github.event_name == 'push' && startsWith(github.ref_name, 'v')
+      #   run: |
+      #     docker tag ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64 ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64:latest
+      #     docker tag ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64 ${{ env.REGISTRY }}/trials-ha-addon-addon/amd64:${{ github.ref_name }}
 
 
 
