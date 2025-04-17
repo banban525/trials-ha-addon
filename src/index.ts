@@ -37,6 +37,9 @@ function getFiles(path:string):FileInfo[]
 
 async function main():Promise<void>
 {
+  let testMode = 'C:\\work\\trials-ha-addon\\storage'
+  testMode = '';
+
   // 環境変数をconsoleに出す
   const MQTT_BROKER = process.env.MQTT_BROKER ??"";
   const ECHONET_TARGET_NETWORK = process.env.ECHONET_TARGET_NETWORK ?? "";
@@ -74,13 +77,32 @@ async function main():Promise<void>
       addonConfig: []
     };
 
-    fileInfos.data = getFiles("/data");
-    fileInfos.ssl = getFiles("/ssl");
-    fileInfos.addonConfig = getFiles("/addon_config");
 
-    res.json(fileInfos);
+
+    fileInfos.data = getFiles(`${testMode}/data`);
+    fileInfos.ssl = getFiles(`${testMode}/ssl`);
+    fileInfos.addonConfig = getFiles(`${testMode}/addon_config`);
+
+    res.render("files/index", {fileInfos});
 
   });
+
+  app.get("/rawfile", (req, res) => {
+
+    const path = req.query.path?.toString() ?? "";
+    if(fs.existsSync(path) === false)
+    {
+      res.status(404).send("File not found");
+      return;
+    }
+
+    const content = fs.readFileSync(path, {encoding: "utf-8"});
+
+    res.render("rawfile/index", {path,content});
+
+  });
+
+
 
   const server = app.listen(8098, ():void => {
     console.log("Server is running on http://localhost:8098");

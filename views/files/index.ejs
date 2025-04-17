@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+</head>
+<body>
+  <header>
+    <h1>Folder</h1>
+  </header>
+  <h2>/data</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>size</th>
+        <th>updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% fileInfos.data.forEach(file => { %>
+        <tr>
+          <td><a href="/rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><%= file.size %></td>
+          <td><%= file.lastModified %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2>/ssl</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>size</th>
+        <th>updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% fileInfos.ssl.forEach(file => { %>
+        <tr>
+          <td><a href="/rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><%= file.size %></td>
+          <td><%= file.lastModified %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+
+  <h2>/addon_config</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>size</th>
+        <th>updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% fileInfos.addonConfig.forEach(file => { %>
+        <tr>
+          <td><a href="/rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><%= file.size %></td>
+          <td><%= file.lastModified %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+
+</html>
