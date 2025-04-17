@@ -90,6 +90,9 @@ async function main():Promise<void>
   app.get("/rawfile", (req, res) => {
 
     const path = req.query.path?.toString() ?? "";
+
+    console.log("/rawfile path:"+path);
+
     if(fs.existsSync(path) === false)
     {
       res.status(404).send("File not found");
@@ -97,6 +100,7 @@ async function main():Promise<void>
     }
 
     const content = fs.readFileSync(path, {encoding: "utf-8"});
+    console.log("/rawfile content:"+content);
 
     res.render("rawfile/index", {path,content});
 
