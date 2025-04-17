@@ -28,6 +28,7 @@ map:
     read_only: false
 options:
   mqtt: {}
+  echonet: {}
 schema:
   mqtt:
     broker: str?
@@ -38,7 +39,8 @@ schema:
     base_topic: str?
   echonet:
     target_network: str?
-    device_ip_list: str?
+    device_ip_list:
+      - str
     command_timeout: int?
     disable_auto_device_discovery: bool?
     alias_file: str?
