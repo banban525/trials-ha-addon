@@ -50,6 +50,7 @@ async function main():Promise<void>
   console.log("REST_API_PORT:", REST_API_PORT);
 
 
+  const port = Number(REST_API_PORT);
 
   const app = express();
 
@@ -110,8 +111,8 @@ async function main():Promise<void>
 
 
 
-  const server = app.listen(8098, ():void => {
-    console.log("Server is running on http://localhost:8098");
+  const server = app.listen(port, ():void => {
+    console.log("Server is running on http://localhost:" + port);
   });
 }
 
