@@ -74,7 +74,7 @@ async function main():Promise<void>
 
   });
 
-  const server = app.listen(8099, ():void => {
+  const server = app.listen(8098, ():void => {
     console.log("Server is running on http://localhost:8099");
   });
 }
