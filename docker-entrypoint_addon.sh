@@ -7,6 +7,9 @@ if (bashio::config.has_value 'echonet.target_network'); then
   export ECHONET_TARGET_NETWORK=$(bashio::config "echonet.target_network")
 fi
 
+INGRESS_PORT=$(bashio::addon.ingress_port)
+export REST_API_PORT=$INGRESS_PORT
+
 
 echo "Running custom entrypoint script for addon..."
 npm run start:built

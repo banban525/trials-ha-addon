@@ -43,9 +43,11 @@ async function main():Promise<void>
   // 環境変数をconsoleに出す
   const MQTT_BROKER = process.env.MQTT_BROKER ??"";
   const ECHONET_TARGET_NETWORK = process.env.ECHONET_TARGET_NETWORK ?? "";
+  const REST_API_PORT = process.env.REST_API_PORT ?? "";
 
   console.log("MQTT_BROKER:", MQTT_BROKER);
   console.log("ECHONET_TARGET_NETWORK:", ECHONET_TARGET_NETWORK);
+  console.log("REST_API_PORT:", REST_API_PORT);
 
 
 
