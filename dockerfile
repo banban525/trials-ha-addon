@@ -30,6 +30,7 @@ USER node
 RUN npm ci --omit=dev
 COPY --chown=node:node --from=build /app/public ./public
 COPY --chown=node:node --from=build /app/.ts-node ./.ts-node
+COPY --chown=node:node --from=build /app/views ./views
 COPY --chown=node:node --from=build /app/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 3000

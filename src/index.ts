@@ -48,10 +48,18 @@ async function main():Promise<void>
 
   const app = express();
 
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  // ejs
+  app.set("view engine", "ejs");
+  app.set("views", "views");
+
+
   app.use(express.static("public"));
   app.get("/", (req, res) => {
 
-    res.send("hello");
+    res.render("home/index",{});
   });
 
   app.get("/files", (req, res) => {
@@ -75,7 +83,7 @@ async function main():Promise<void>
   });
 
   const server = app.listen(8098, ():void => {
-    console.log("Server is running on http://localhost:8099");
+    console.log("Server is running on http://localhost:8098");
   });
 }
 
