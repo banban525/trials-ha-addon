@@ -46,4 +46,6 @@ schema:
     alias_file: str?
     legacy_multi_nic_mode: int?
     unknown_as_error: bool?
+  device_ip_list:
+    - str
 
