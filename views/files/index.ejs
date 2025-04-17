@@ -21,7 +21,7 @@
     <tbody>
       <% fileInfos.data.forEach(file => { %>
         <tr>
-          <td><a href="../rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><a href="rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
           <td><%= file.size %></td>
           <td><%= file.lastModified %></td>
         </tr>
@@ -41,7 +41,7 @@
     <tbody>
       <% fileInfos.ssl.forEach(file => { %>
         <tr>
-          <td><a href="/rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><a href="rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
           <td><%= file.size %></td>
           <td><%= file.lastModified %></td>
         </tr>
@@ -62,7 +62,7 @@
     <tbody>
       <% fileInfos.addonConfig.forEach(file => { %>
         <tr>
-          <td><a href="/rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
+          <td><a href="rawfile/?path=<%= file.path %>"><%= file.path %></a></td>
           <td><%= file.size %></td>
           <td><%= file.lastModified %></td>
         </tr>
