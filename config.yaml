@@ -28,7 +28,10 @@ map:
     read_only: false
 options:
   mqtt: {}
-  echonet: {}
+  echonet: {
+    device_ip_list: []
+  }
+  device_ip_list: []
 schema:
   mqtt:
     broker: str?
